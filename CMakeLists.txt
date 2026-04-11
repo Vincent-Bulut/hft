@@ -18,22 +18,18 @@ target_include_directories(hft_lib PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-pybind11_add_module(hft_pricing
+pybind11_add_module(_core
         src/bindings.cpp
 )
 
-target_include_directories(hft_pricing PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
+target_link_libraries(_core PRIVATE hft_lib)
 
-target_link_libraries(hft_pricing PRIVATE hft_lib)
+set_target_properties(_core PROPERTIES
+        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/python/hft
+)
 
 add_executable(hft
         src/main.cpp
-)
-
-target_include_directories(hft PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 target_link_libraries(hft PRIVATE hft_lib)

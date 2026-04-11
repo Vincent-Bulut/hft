@@ -3,7 +3,7 @@
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(hft_pricing, m) {
+PYBIND11_MODULE(_core, m) {
     m.doc() = "Black-Scholes pricing module";
 
     m.def("call", &hft::black_scholes_call,
